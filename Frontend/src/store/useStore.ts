@@ -105,7 +105,7 @@ const useStore = create<StoreState>((set) => ({
           id: '1',
           name: 'Demo User',
           email: 'demo@example.com',
-          isAdmin: false
+          isAdmin: true
         }
       });
     } else {
