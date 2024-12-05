@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { ShoppingCart, User, BookOpen } from 'lucide-react';
 import useStore from '../store/useStore';
