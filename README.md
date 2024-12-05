@@ -126,3 +126,6 @@ MIT License
 - Project Lead: Marwan El-Adawi
 - Email: marwaneladawii@gmail.com
 - Project Link: https://github.com/Marwan-Adawi/Bookstore.git 
+
+## FYI
+- The project is still not finished and still being updated you're free to test and give feedback thru email.
