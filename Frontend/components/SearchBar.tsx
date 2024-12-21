@@ -1,14 +1,16 @@
+'use client'
+
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useRouter } from 'next/navigation'
 
 export default function SearchBar() {
   const [query, setQuery] = useState('')
-  const navigate = useNavigate()
+  const router = useRouter()
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
     if (query.trim()) {
-      navigate(`/search?q=${encodeURIComponent(query)}`)
+      router.push(`/search?q=${encodeURIComponent(query)}`)
     }
   }
 
