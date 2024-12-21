@@ -1,3 +1,4 @@
+import React from 'react';
 import { Minus, Plus, Trash2 } from 'lucide-react';
 import { CartItem as CartItemType } from '../types';
 import useStore from '../store/useStore';
