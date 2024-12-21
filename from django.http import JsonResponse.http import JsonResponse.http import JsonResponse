@@ -1,0 +1,46 @@
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
+
+class PaymentFactory:
+    @staticmethod
+    def create_payment_method(payment_type):
+        if payment_type == 'creditCard':
+            return CreditCardPayment()
+        elif payment_type == 'paypal':
+            return PayPalPayment()
+        else:
+            raise ValueError("Invalid payment method type")
+
+class CreditCardPayment:
+    def process_payment(self, amount):
+        return {"status": "success", "message": f"Processed credit card payment of ${amount}"}
+
+class PayPalPayment:
+    def process_payment(self, amount):
+        return {"status": "success", "message": f"Processed PayPal payment of ${amount}"}
+
+@csrf_exempt
+def process_payment(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            payment_type = data.get('paymentType')
+            amount = data.get('amount')
+
+            payment_method = PaymentFactory.create_payment_method(payment_type)
+            result = payment_method.process_payment(amount)
+
+            return JsonResponse(result, status=200)
+        except ValueError as e:
+            return JsonResponse({"status": "error", "message": str(e)}, status=400)
+        except Exception as e:
+            return JsonResponse({"status": "error", "message": "An error occurred"}, status=500)
+    return JsonResponse({"status": "error", "message": "Invalid request method"}, status=405)
+
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('process-payment/', views.process_payment, name='process_payment'),
+]
