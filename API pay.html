@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Payment frame Method </title>
+  <script src="https://js.stripe.com/v3/"></script>
+  <style>
+   
+    #payment-form {
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-family: Arial, sans-serif;
+    }
+
+    #card-element {
+      margin-bottom: 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    #card-errors {
+      color: red;
+      margin-bottom: 10px;
+    }
+
+    button {
+      background-color: #cd6636;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+
+
+    button:hover {
+      background-color: #cd6636;
+    }
+  </style>
+</head>
+<body>
+  <form id="payment-form">
+    <h2>Complete Your Payment</h2>
+    <!-- Stripe will insert its Card Element here -->
+    <div id="card-element"></div>
+
+    <!-- Display validation errors -->
+    <div id="card-errors" role="alert"></div>
+
+    <button id="submit">Pay</button>
+  </form>
+
+  <script>
+    // Initialize Stripe with your publishable key
+    const stripe = Stripe('your-publishable-key');
+
+    // Create an instance of Elements
+    const elements = stripe.elements();
+
+    // Create and style the Card Element
+    const card = elements.create('card', {
+      style: {
+        base: {
+          color: "#32325d",
+          fontFamily: 'Arial, sans-serif',
+          fontSmoothing: "antialiased",
+          fontSize: "16px",
+          "::placeholder": {
+            color: "#aab7c4"
+          }
+        },
+        invalid: {
+          color: "#fa755a",
+          iconColor: "#fa755a"
+        }
+      }
+    });
+
+    // Mount the Card Element into the #card-element div
+    card.mount('#card-element');
+
+    // Handle real-time validation errors
+    card.on('change', (event) => {
+      const displayError = document.getElementById('card-errors');
+      if (event.error) {
+        displayError.textContent = event.error.message;
+      } else {
+        displayError.textContent = '';
+      }
+    });
+
+    // Handle form submission
+    const form = document.getElementById('payment-form');
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      // Replace 'your-client-secret' with the actual client secret from your backend
+      const { error, paymentIntent } = await stripe.confirmCardPayment('your-client-secret', {
+        payment_method: {
+          card: card,
+        },
+      });
+
+      if (error) {
+        // Display the error to the user
+        document.getElementById('card-errors').textContent = error.message;
+      } else {
+        // Payment successful
+        alert('Payment successful!');
+      }
+    });
+  </script>
+</body>
+</html>
