@@ -1,0 +1,157 @@
+USER:
+    LOGIN TEST CASES:
+        Test-Case #1:
+        Test ID: LOGIN-001
+        Description: Verify user login with valid credentials
+        Precondition: User account exists in system
+        Input: 
+        - Username: "testuser"
+        - Password: "validpass123"
+        Expected Output: User successfully logged in and redirected to dashboard.
+
+        Test-Case #2:
+        Test ID: LOGIN-002
+        Description: Verify user login with valid credentials
+        Precondition: User account doesn't exists in system
+        Input: 
+        - Username: "testuser2"
+        - Password: "validpass123"
+        Expected Output: User logged in is unsuccessfully and redirected to sign up.
+
+        Test-Case #3:
+        Test ID: LOGIN-003
+        Description: Verify user login with in-valid credentials, Password is wrong.
+        Precondition: User account exists in system
+        Input: 
+        - Username: "testuser"
+        - Password: "validpass23"
+        Expected Output: User log in is unsuccessfully and pop-up message show "Invalid credentials".
+---------------------------------------------------------------------------------------------
+    SIGNUP TEST CASES:
+        Test-Case #1:
+        Test ID: SIGNUP-001
+        Description: Verify user SIGNUP with valid credentials
+        Precondition: User account doesn't exists in system
+        Input: 
+        - Account: "test@example.com"
+        - Password: "validpass123"
+        Expected Output: User successfully signed up and redirected to dashboard.
+
+        Test-Case #2:
+        Test ID: SIGNUP-002
+        Description: Verify user SIGNUP with in-valid credentials, email address is in wrong format.
+        Precondition: User account doesn't exists in system
+        Input: 
+        - Account: "test"
+        - Password: "validpass123"
+        Expected Output: User singup is unsuccessfully and a pop-up message show "invalid email format".
+---------------------------------------------------------------------------------------------
+    SEARCH TEST CASES:
+        Test-Case #1:
+        Test ID: SEARCH-001
+        Description: User SEARCH with book name
+        Precondition: Book exists in system
+        Input: 
+        - Book: "milk and honey"
+        Expected Output: User search is successfully and redirected to to book page.
+
+        Test-Case #2:
+        Test ID: SEARCH-001
+        Description: User SEARCH with category.
+        Precondition: Category exists in system
+        Input: 
+        - Category: "Fiction"
+        Expected Output: User search is successfully and redirected to books in the same category.
+
+        Test-Case #3:
+        Test ID: SEARCH-003
+        Description: User SEARCH with book name
+        Precondition: Book doesn't exists in system
+        Input: 
+        - Book: "Lions"
+        Expected Output: User search is un-successfully and a pop-up message shhows 'Unavailable'.
+
+        Test-Case #4:
+        Test ID: SEARCH-001
+        Description: User SEARCH with category.
+        Precondition: Category doesn't exists in system
+        Input: 
+        - Book: "Space"
+        Expected Output: User search is un-successfully and a pop-up message shows 'Unavailable'.
+--------------------------------------------------------------------------------------------
+    ADD TO CART TEST CASES:
+        Test-Case #1:
+        Test ID: Add-to-cart-001
+        Description: Uer add to cart action.
+        Precondition: Book copies exists in system
+        Input: 
+        - Add to cart [button]
+        Expected Output: User add to cart is successfully and book is added to cart.
+
+        Test-Case #2:
+        Test ID: Add-to-cart-002
+        Description: User add to cart action.
+        Precondition: Book copies doesn't exists in system
+        Input: 
+        - Add to cart [button]
+        Expected Output: User add to cart is unsuccessfully and a pop-up message show "No copies available".
+--------------------------------------------------------------------------------------------
+    PROCEED TO CHECKOUT TEST CASES:
+        Test-Case #1:
+        Test ID: PROCEED-TO-CHECKOUT-001
+        Description: User proceed to checkout action.
+        Precondition: Book copies exists in cart, the payment method is successful.
+        Input: 
+        - Proceed to checkout [button]
+        Expected Output: User proceed to checkout is successfully and book is bought.
+
+        Test-Case #2:
+        Test ID: PROCEED-TO-CHECKOUT-002
+        Description: User proceed to checkout action.
+        Precondition: Book copies exists in cart, the payment method is unsuccessful.
+        Input: 
+        - Proceed to checkout [button]
+        Expected Output: User proceed to checkout is unsuccessfully and popup message show 'payment failed'.
+
+        Test-Case #3:
+        Test ID: PROCEED-TO-CHECKOUT-003
+        Description: User proceed to checkout action.
+        Precondition: Book copies doesn't exists in cart, the payment method is successful.
+        Input: 
+        - Proceed to checkout [button]
+        Expected Output: User proceed to checkout is unsuccessfully and popup message show 'Please add a book to cart first'.
+--------------------------------------------------------------------------------------------
+ADMIN:
+    ADD BOOKS:
+        Test-Case #1:
+        Test ID: ADD-BOOK-TO-INVENTORY-001
+        Description: Admin proceed to add a book to inventory.
+        Precondition: Book copies exists in system.
+        Input: 
+        - Add book to inventory [button]
+        Expected Output: Admin Add to book is successfully and book copies is added.
+
+        Test-Case #2:
+        Test ID: ADD-BOOK-TO-INVENTORY-001
+        Description: Admin proceed to add a book to inventory.
+        Precondition: Book copies doesn't exists in system.
+        Input: 
+        - Add book to inventory [button]
+        Expected Output: Admin Add to book is successfully and book copies is added.
+-------------------------------------------------------------------------------------------
+    REMOVE BOOKS:
+        Test-Case #1:
+        Test ID: REMOVE-BOOK-FROM-INVENTORY-001
+        Description: Admin proceed to remove a book from inventory.
+        Precondition: Book copies exists in system.
+        Input: 
+        - Remove book from inventory [button]
+        Expected Output: Admin remove book is successfully and book is removed.
+
+        Test-Case #2:
+        Test ID: REMOVE-BOOK-FROM-INVENTORY-002
+        Description: Admin proceed to remove a book from inventory.
+        Precondition: Book copies deosn't exists in system.
+        Input: 
+        - Remove book from inventory [button]
+        Expected Output: Admin remove book is unsuccessfully and popup meassage show "No books available".
